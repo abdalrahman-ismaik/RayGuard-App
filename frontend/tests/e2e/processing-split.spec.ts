@@ -327,7 +327,8 @@ test('offline processing preserves both image identities, stops motion and recon
   await expect(right(page).locator('.scan-svg image')).toHaveAttribute('href', `/api/scans/${id(2)}/image`)
   server.finish()
   server.reconnect()
-  await page.getByRole('button', { name: 'Reconnect service' }).click()
+  // The active-run poll recovers the connection and removes the manual retry control.
+  await expect(page.getByRole('button', { name: 'Reconnect service' })).toHaveCount(0)
   await expect(split(page)).toHaveCount(0)
   await expect(page.getByRole('dialog', { name: 'RayGuard introduction' })).toHaveCount(0)
   expect(server.writes.filter(item => item.path === '/api/runs')).toHaveLength(1)

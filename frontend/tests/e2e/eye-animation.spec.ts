@@ -305,7 +305,8 @@ test('losing the service during a run stops the eye and exposes uncertain run st
   await expect(page.locator('.canvas-processing')).toContainText('Service unavailable · run status unknown')
   server.complete()
   server.reconnect()
-  await page.getByRole('button', { name: 'Reconnect service' }).click()
+  // Active-run polling reconnects automatically; the manual retry button can disappear.
+  await expect(page.getByRole('button', { name: 'Reconnect service' })).toHaveCount(0)
   await expect(page.getByLabel('Upload X-ray image')).toBeEnabled()
   await expect(intro(page)).toHaveCount(0)
   expect(server.errors).toEqual([])
