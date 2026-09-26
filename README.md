@@ -1,4 +1,41 @@
-# RayGuard App
+<h1 align="center">RayGuard App</h1>
+
+<p align="center">
+  <img src="docs/images/readme-header.svg" alt="RayGuard — local X-ray inspection. Receive, inspect, review and export." width="1200">
+</p>
+
+<p align="center">
+  <strong>A local workspace for X-ray inspection.</strong><br>
+  Receive images, inspect model results and keep the evidence in view.
+</p>
+
+<p align="center">
+  <code>React + TypeScript</code> &nbsp; <code>FastAPI</code> &nbsp; <code>YOLOv10</code>
+</p>
+
+<p align="center">
+  <a href="#see-it-in-action">Watch the demo</a> &nbsp;·&nbsp;
+  <a href="#clone-and-start">Get started</a> &nbsp;·&nbsp;
+  <a href="docs/usage.md">Usage guide</a> &nbsp;·&nbsp;
+  <a href="CONTRIBUTING.md">Contribute</a>
+</p>
+
+## See it in action
+
+**Load → run → inspect → review.** A short walkthrough of the actual application
+using visibly synthetic sample images and the configured detector.
+
+[![RayGuard walkthrough: load a synthetic sample, run inference, inspect with zoom and magnifier, and review the result](docs/images/gui-demo.gif)](docs/images/gui-demo.mp4)
+
+[Watch or download the sharper MP4](docs/images/gui-demo.mp4) · 34 seconds · Silent ·
+[Capture notes](docs/images/README.md)
+
+The sample images are synthetic demonstration inputs. The recording illustrates
+the interface and actual execution, not detector accuracy or a safety assessment.
+No research scans are included in these assets.
+Edited for pacing: 12 seconds of inference waiting were removed.
+
+## About
 
 A local X-ray inspection interface for the RayGuard research project: upload or
 receive images, inspect real model detections, compare eligible test references,

@@ -9,6 +9,11 @@ zoom/pan/magnifier, processing/completed split view, model/device selection,
 review and export are implemented. The Windows entry point is `run-app.ps1`.
 Inference needs separately authorized weights, datasets and a qualified runtime.
 
+The README now includes an original graphical title and a 34-second app
+walkthrough in GIF/MP4 formats. The demo uses visibly synthetic inputs with actual
+model execution; it is not accuracy evidence. [Capture notes](images/README.md)
+record the omitted wait, results, asset provenance and media verification.
+
 Backend lint and 280 tests, frontend build and 149 browser checks passed. Fresh
 CPU/GPU qualification and two ordinary generic YOLO runs passed from this folder:
 one training-image positive and the retained known test-image miss. See the

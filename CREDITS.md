@@ -43,5 +43,11 @@ No separate media-license document accompanied that package. This attribution
 does not invent a new third-party license or claim ownership of others' work.
 Private source URLs and the separate planner source package are not published here.
 
+**README visuals:** the original RayGuard wordmark banner uses outlined Barlow
+glyphs. The walkthrough records this app with original synthetic drawings and
+actual local model execution. See [capture notes](docs/images/README.md) for
+sources, encoding, edits and evidence limits. No reference-project artwork or
+research scans were copied into these assets.
+
 No new blanket software or asset license is assigned by this extraction.
 Third-party licenses remain applicable to their own material.

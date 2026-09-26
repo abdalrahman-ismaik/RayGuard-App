@@ -62,3 +62,60 @@ GET-only browser review inspected both genuine saved runs at desktop and 390px:
 the positive box, missed-reference result and GPU/FP32 provenance were correct,
 without creating more runs. Final independent review resolved all 90 local app
 document links and 222 SDP links/anchors, including 69 links into this repository.
+
+## README graphical title and walkthrough — 27 September 2026
+
+The owner requested a graphical name/title and a short demo like his reference
+project. Automated implementation produced an original graphite/Barlow SVG and
+a 34-second recording of the actual app, published as an inline GIF with a
+sharper, smaller MP4 alternative. Separate agents owned the banner and browser
+capture; the coordinator owned the edit, documentation, verification and Git.
+An independent reviewer checked the finished presentation. No student hours or
+additional individual authorship are inferred.
+
+The app code and engine pin are unchanged. The capture used its own local
+service/storage and two original, visibly labelled synthetic drawings. Fresh
+CPU/GPU qualification and two real generic YOLO runs succeeded; both returned
+zero detections at 0.25. Recorded run elapsed times were 8.848 and 17.939 seconds.
+The 12-second idle-wait cut is disclosed beside the demo and in
+[the asset record](images/README.md). This is actual model execution on synthetic
+inputs, not real-data validation, accuracy measurement or a safe/benign verdict.
+No dataset photographs, checkpoints or private settings entered the public media.
+
+Verification commands and actual outcomes:
+
+- In the ignored local composition, `npx.cmd --yes hyperframes@0.8.79 check --json`
+  passed with zero lint/runtime/layout findings and 20/20 caption contrast checks.
+  `snapshot --at 3,10,18,25,31 --no-end --describe false` produced five inspected
+  frames. The app recording itself reported zero browser console errors/warnings.
+- `npx.cmd --yes hyperframes@0.8.79 render --quality looks --fps 25 --workers 2
+  --output ../../../docs/images/gui-demo.mp4` produced all 848 frames. The source
+  WebM triggered a sparse-keyframe advisory; the renderer extracted all 848
+  required frames with full coverage. Final frames show the intended processing,
+  zoom, pan, magnifier and review states.
+- The ignored `python output/readme-demo/finish_media.py` used locally resolved
+  FFmpeg/FFprobe executables to encode the GIF, decode both entire final streams
+  without errors and confirm their metadata. MP4: 1440 × 988, 25 fps, 33.92 s;
+  GIF: 1000 × 686, 10 fps, 33.90 s. Exact sizes and SHA-256 hashes are in the asset
+  record. Final contact-sheet and magnifier-frame inspection passed.
+- `python output/readme-demo/check_links.py` resolved all 93 local targets in
+  README, credits and `docs/`, including HTML image sources; none were missing.
+  The one Impeccable mechanical detector pass returned no findings. The header
+  passed desktop/mobile checks and contains no scripts or external resources.
+- `git diff --check` passed. Git ignore checks confirmed raw capture, local
+  configuration, generated inputs, composition and helper tools remain ignored.
+- Independent README browser review at 1440px and 390px found no horizontal
+  overflow; both images loaded. GIF/MP4 samples around the edit boundary and all
+  inspection/review stages agreed, without frozen frames. The GIF had 335
+  changing frame transitions. The staged-file review accepted exactly nine
+  documentation/media files, matched the published-asset hashes to Git's index
+  and found no unexpected private paths or credential patterns.
+
+These are documentation/media changes; no new app behavior, training, model or
+dataset download is claimed. Existing application checks remain separately
+recorded: the hosted run for `3cd38d1` passed both API operating-system jobs and
+all 149 browser checks
+([run 36272488630](https://github.com/abdalrahman-ismaik/RayGuard-App/actions/runs/36272488630)).
+Research tasks and showcase acceptance remain open in the linked SDP backlog.
+Next action: use the new walkthrough to introduce the app, then rehearse with
+the authorized research diagnostics on the actual presentation laptop.
