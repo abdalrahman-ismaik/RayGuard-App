@@ -1,0 +1,130 @@
+{
+  "inspected_date": "2026-09-26",
+  "repository": "https://github.com/jpt/barlow",
+  "revision": "dc2940e2e04ef4ec96c07e23e0f02aefbddd343b",
+  "license": "SIL Open Font License 1.1",
+  "license_file": "OFL.txt",
+  "license_url": "https://raw.githubusercontent.com/jpt/barlow/dc2940e2e04ef4ec96c07e23e0f02aefbddd343b/OFL.txt",
+  "license_sha256": "186d750eb496a4c17a76385f82be6aea2ac1cf2de074a811d63786cf374ea73f",
+  "modifications": "None; exact upstream WOFF2 bytes",
+  "assets": [
+    {
+      "filename": "Barlow-Regular.woff2",
+      "source_url": "https://raw.githubusercontent.com/jpt/barlow/dc2940e2e04ef4ec96c07e23e0f02aefbddd343b/fonts/woff2/Barlow-Regular.woff2",
+      "revision": "dc2940e2e04ef4ec96c07e23e0f02aefbddd343b",
+      "sha256": "2904d763039d78176366e8e32c2c8cebecf2da19e249a7c077cd8c8a736c5cd4",
+      "bytes": 58964,
+      "weight": 400,
+      "style": "normal",
+      "name_table": {
+        "1": [
+          "Barlow"
+        ],
+        "2": [
+          "Regular"
+        ],
+        "4": [
+          "Barlow Regular"
+        ],
+        "6": [
+          "Barlow-Regular"
+        ],
+        "16": [],
+        "17": []
+      }
+    },
+    {
+      "filename": "Barlow-Medium.woff2",
+      "source_url": "https://raw.githubusercontent.com/jpt/barlow/dc2940e2e04ef4ec96c07e23e0f02aefbddd343b/fonts/woff2/Barlow-Medium.woff2",
+      "revision": "dc2940e2e04ef4ec96c07e23e0f02aefbddd343b",
+      "sha256": "026d66f2f95c28f8da01f432139c3d68c2f0b96961a3e3a7ccb884e7f640aaba",
+      "bytes": 59180,
+      "weight": 500,
+      "style": "normal",
+      "name_table": {
+        "1": [
+          "Barlow",
+          "Barlow Medium"
+        ],
+        "2": [
+          "Medium",
+          "Regular"
+        ],
+        "4": [
+          "Barlow Medium"
+        ],
+        "6": [
+          "Barlow-Medium"
+        ],
+        "16": [
+          "Barlow"
+        ],
+        "17": [
+          "Medium"
+        ]
+      }
+    },
+    {
+      "filename": "Barlow-SemiBold.woff2",
+      "source_url": "https://raw.githubusercontent.com/jpt/barlow/dc2940e2e04ef4ec96c07e23e0f02aefbddd343b/fonts/woff2/Barlow-SemiBold.woff2",
+      "revision": "dc2940e2e04ef4ec96c07e23e0f02aefbddd343b",
+      "sha256": "444b951177325b7a2f1ee61412a0d66c04d0e1ee438ef14430025f1b128d557f",
+      "bytes": 59936,
+      "weight": 600,
+      "style": "normal",
+      "name_table": {
+        "1": [
+          "Barlow",
+          "Barlow SemiBold"
+        ],
+        "2": [
+          "Regular",
+          "SemiBold"
+        ],
+        "4": [
+          "Barlow SemiBold"
+        ],
+        "6": [
+          "Barlow-SemiBold"
+        ],
+        "16": [
+          "Barlow"
+        ],
+        "17": [
+          "SemiBold"
+        ]
+      }
+    },
+    {
+      "filename": "BarlowSemiCondensed-SemiBold.woff2",
+      "source_url": "https://raw.githubusercontent.com/jpt/barlow/dc2940e2e04ef4ec96c07e23e0f02aefbddd343b/fonts/woff2/BarlowSemiCondensed-SemiBold.woff2",
+      "revision": "dc2940e2e04ef4ec96c07e23e0f02aefbddd343b",
+      "sha256": "bae9a20f1461da5276b405097cfd4ad72a888632b65780ca3a0b996cb4aab3ad",
+      "bytes": 64440,
+      "weight": 600,
+      "style": "normal",
+      "name_table": {
+        "1": [
+          "Barlow Semi Condensed",
+          "Barlow Semi Condensed SemiBold"
+        ],
+        "2": [
+          "Regular",
+          "SemiBold"
+        ],
+        "4": [
+          "Barlow Semi Condensed SemiBold"
+        ],
+        "6": [
+          "BarlowSemiCondensed-SemiBold"
+        ],
+        "16": [
+          "Barlow Semi Condensed"
+        ],
+        "17": [
+          "SemiBold"
+        ]
+      }
+    }
+  ]
+}

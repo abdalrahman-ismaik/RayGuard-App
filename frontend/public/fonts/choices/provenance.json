@@ -1,0 +1,133 @@
+{
+  "inspected_date": "2026-09-26",
+  "fonttools_version": "4.66.0",
+  "assets": [
+    {
+      "family": "Geist",
+      "font_names": [
+        "Geist"
+      ],
+      "filename": "GeistVariable.woff2",
+      "source_repository": "https://github.com/vercel/geist-font",
+      "revision": "10dc7658f13c38a474cde201bb09a4617267545b",
+      "source_url": "https://raw.githubusercontent.com/vercel/geist-font/10dc7658f13c38a474cde201bb09a4617267545b/fonts/Geist/webfonts/Geist%5Bwght%5D.woff2",
+      "source_sha256": "2ffebe993e969069a9789d15164b7715d42491b5835516c5e3b935d5f81b05f1",
+      "sha256": "2ffebe993e969069a9789d15164b7715d42491b5835516c5e3b935d5f81b05f1",
+      "bytes": 69760,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 100.0,
+          "maximum": 900.0
+        }
+      ],
+      "license_file": "Geist-OFL.txt",
+      "license_url": "https://raw.githubusercontent.com/vercel/geist-font/10dc7658f13c38a474cde201bb09a4617267545b/OFL.txt",
+      "license_sha256": "c683bfbcc7e087f5d37a54ef628f10387c451a83ddc459b151403a164ac46c90",
+      "conversion": null
+    },
+    {
+      "family": "Inter",
+      "font_names": [
+        "Inter Variable"
+      ],
+      "filename": "InterVariable.woff2",
+      "source_repository": "https://github.com/rsms/inter",
+      "revision": "353b61b9f4430d5f420d56605a6e7993e0941470",
+      "source_url": "https://raw.githubusercontent.com/rsms/inter/353b61b9f4430d5f420d56605a6e7993e0941470/docs/font-files/InterVariable.woff2",
+      "source_sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "sha256": "693b77d4f32ee9b8bfc995589b5fad5e99adf2832738661f5402f9978429a8e3",
+      "bytes": 352240,
+      "axes": [
+        {
+          "tag": "opsz",
+          "minimum": 14.0,
+          "maximum": 32.0
+        },
+        {
+          "tag": "wght",
+          "minimum": 100.0,
+          "maximum": 900.0
+        }
+      ],
+      "license_file": "Inter-OFL.txt",
+      "license_url": "https://raw.githubusercontent.com/rsms/inter/353b61b9f4430d5f420d56605a6e7993e0941470/LICENSE.txt",
+      "license_sha256": "262481e844521b326f5ecd053e59b98c8b2da78c8ee1bdbb6e8174305e54935a",
+      "conversion": null
+    },
+    {
+      "family": "Manrope",
+      "font_names": [
+        "Manrope",
+        "Manrope ExtraLight"
+      ],
+      "filename": "ManropeVariable.woff2",
+      "source_repository": "https://github.com/googlefonts/manrope",
+      "revision": "468c0dbe38efa331b80bfe9448256abe27be44c3",
+      "source_url": "https://raw.githubusercontent.com/googlefonts/manrope/468c0dbe38efa331b80bfe9448256abe27be44c3/fonts/webfonts/Manrope%5Bwght%5D.woff2",
+      "source_sha256": "30b83738add8c9edd9e3450b98036a9a8fb5668d0cbd4eb0ce5fe6761197f21f",
+      "sha256": "30b83738add8c9edd9e3450b98036a9a8fb5668d0cbd4eb0ce5fe6761197f21f",
+      "bytes": 53892,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 200.0,
+          "maximum": 800.0
+        }
+      ],
+      "license_file": "Manrope-OFL.txt",
+      "license_url": "https://raw.githubusercontent.com/googlefonts/manrope/468c0dbe38efa331b80bfe9448256abe27be44c3/OFL.txt",
+      "license_sha256": "58172e0c0fac2cda8a37b348164bb55e44b0e69051e557e92b1d3f6910141f7b",
+      "conversion": null
+    },
+    {
+      "family": "PublicSans",
+      "font_names": [
+        "Public Sans",
+        "Public Sans Thin"
+      ],
+      "filename": "PublicSansVariable.woff2",
+      "source_repository": "https://github.com/uswds/public-sans",
+      "revision": "d3df3455fb94643925f816276e81b231bc31619f",
+      "source_url": "https://raw.githubusercontent.com/uswds/public-sans/d3df3455fb94643925f816276e81b231bc31619f/fonts/variable/PublicSans%5Bwght%5D.ttf",
+      "source_sha256": "d75a7dc1a27eb9e336d5b33f55489d2ecb5621bf694d5c43b2415bce2ca830a8",
+      "sha256": "0dc1736888d7214101b9c20f93f174ea076b4edda3d2b3fb1a7ea934f7915658",
+      "bytes": 42020,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 100.0,
+          "maximum": 900.0
+        }
+      ],
+      "license_file": "PublicSans-OFL.txt",
+      "license_url": "https://raw.githubusercontent.com/uswds/public-sans/d3df3455fb94643925f816276e81b231bc31619f/OFL.txt",
+      "license_sha256": "157a9e77f7580246e97c769490e2e977ae94399f9d30f4556015c41fe8c28bac",
+      "conversion": "Lossless WOFF2 container conversion with fontTools 4.66.0; no subsetting or glyph changes"
+    },
+    {
+      "family": "SourceSans3",
+      "font_names": [
+        "SourceSans3VF"
+      ],
+      "filename": "SourceSans3Variable.woff2",
+      "source_repository": "https://github.com/adobe-fonts/source-sans",
+      "revision": "87b37a2daaed80fcb8e8ccb0085c4d72ddade12e",
+      "source_url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/87b37a2daaed80fcb8e8ccb0085c4d72ddade12e/WOFF2/VF/SourceSans3VF-Upright.ttf.woff2",
+      "source_sha256": "5f16566f7a40d39b339ad26be151fa5a1ab1f0c2574c7a2e619765584a1acbd8",
+      "sha256": "5f16566f7a40d39b339ad26be151fa5a1ab1f0c2574c7a2e619765584a1acbd8",
+      "bytes": 170188,
+      "axes": [
+        {
+          "tag": "wght",
+          "minimum": 200.0,
+          "maximum": 900.0
+        }
+      ],
+      "license_file": "SourceSans3-OFL.txt",
+      "license_url": "https://raw.githubusercontent.com/adobe-fonts/source-sans/87b37a2daaed80fcb8e8ccb0085c4d72ddade12e/LICENSE.md",
+      "license_sha256": "56af9b9c6715597e458284a474dc118a50a4150e9d547c70f7b4a33c3e6a9328",
+      "conversion": null
+    }
+  ]
+}

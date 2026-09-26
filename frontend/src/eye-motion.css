@@ -1,0 +1,60 @@
+/* The supplied blue fiber eye carries the introduction; workspace colors stay local. */
+.rayguard-intro {
+  position: fixed; inset: 0; box-sizing: border-box; width: 100%; max-width: none;
+  height: 100dvh; max-height: none; margin: 0; border: 0; padding: 28px 48px;
+  background: #000; color: #f1f5ff; overflow: auto; color-scheme: dark;
+  opacity: 1; transition: opacity 250ms ease-out;
+}
+.rayguard-intro[open] { display: flex; flex-direction: column; }
+.rayguard-intro::backdrop { background: #000; }
+.rayguard-intro.is-leaving { opacity: 0; }
+.intro-topline, .intro-bottomline { position: relative; z-index: 2; display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-shrink: 0; }
+.intro-topline { color: #b8c8e5; font-size: .875rem; }
+.intro-skip { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 8px 14px; border: 1px solid #3b485e; border-radius: 6px; background: #000; color: #f1f5ff; font-size: .875rem; }
+.intro-skip:hover { background: #182235; }
+.intro-skip:focus-visible { outline: 2px solid #a9c8ff; outline-offset: 5px; }
+.intro-scene { flex: 1; display: flex; align-items: center; justify-content: center; width: 100%; margin: 0 auto; padding: 20dvh 0 0; }
+.intro-copy { position: relative; z-index: 1; text-align: center; }
+.intro-copy h1 { font-size: clamp(2.5rem, 4.5vw, 4.5rem); letter-spacing: -.04em; line-height: 1.08; font-weight: 500; }
+.intro-copy p { margin: 12px auto 0; max-width: 46ch; font-size: clamp(1rem, 1.25vw, 1.125rem); line-height: 1.55; color: #c3d1e8; text-wrap: balance; }
+.intro-media { position: absolute; inset: -20dvh 0 auto; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
+.intro-media::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #0006 0%, transparent 22%, transparent 57%, #000c 84%, #000 100%); }
+.intro-media video, .intro-media img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center; transform: scale(calc(var(--intro-base-scale, 1) * .44)); transform-origin: center; }
+.intro-media [hidden] { display: none; }
+.intro-bottomline { padding-top: 24px; border-top: 1px solid #26334a; color: #aebfdb; font-size: .8125rem; }
+.eye-motion { position: relative; display: inline-block; width: 44px; height: 44px; flex: 0 0 44px; overflow: hidden; border-radius: 50%; background: #000; }
+.eye-motion img, .eye-motion video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.connection-status .eye-motion { width: 24px; height: 24px; flex-basis: 24px; }
+.canvas-processing.eye-processing { inset: auto 12px 12px auto; transform: none; display: flex; align-items: center; gap: 12px; width: auto; max-width: calc(100% - 24px); padding: 8px 14px 8px 8px; border-radius: 8px; background: #172333; text-align: left; }
+.eye-processing .processing-copy { display: flex; flex-direction: column; gap: 2px; color: #f0f3f8; font-size: .875rem; }
+.eye-processing .processing-copy > span { color: #b8c8e5; font-size: .8125rem; }
+.background-activity { display: flex; align-items: center; gap: 10px; margin: 8px 0 12px; color: var(--muted); font-size: var(--text-small); }
+.intake-bar > .background-activity { grid-column: 1 / -1; }
+.presentation-controls { margin: 16px 0 24px; color: var(--muted); font-size: var(--text-small); }
+.presentation-controls > summary { padding: 8px 0; width: fit-content; }
+.presentation-options { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 12px 0; }
+.presentation-options label { display: flex; align-items: center; gap: 8px; min-height: 44px; cursor: pointer; }
+.presentation-options input { accent-color: var(--primary); width: 17px; height: 17px; }
+.presentation-options .secondary-button { min-height: 44px; }
+[data-motion-paused='true'] .spin { animation-play-state: paused; }
+@media (max-width: 700px) {
+  .rayguard-intro { padding: 20px 24px; }
+  .intro-copy h1 { font-size: clamp(2.5rem, 10vw, 3.5rem); }
+  .intro-copy p { max-width: 28ch; font-size: 1rem; }
+  .intro-bottomline { align-items: flex-start; gap: 12px; font-size: .75rem; }
+  .intro-bottomline > span:last-child { text-align: right; }
+}
+@media (max-width: 700px) and (orientation: portrait) {
+  .intro-media video, .intro-media img { --intro-base-scale: 1.8; object-fit: contain; }
+}
+@media (max-height: 520px) {
+  .rayguard-intro { padding: 12px 24px; }
+  .intro-media { top: -24dvh; }
+  .intro-copy h1 { font-size: 2rem; }
+  .intro-copy p { margin-top: 8px; max-width: 60ch; font-size: .875rem; }
+  .intro-scene { padding-top: 16dvh; }
+  .intro-bottomline { padding-top: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rayguard-intro { transition: none; }
+}

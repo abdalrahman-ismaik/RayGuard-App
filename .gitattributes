@@ -1,0 +1,10 @@
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.mp4 binary
+*.woff2 binary
+*.ttf binary
+# Preserve upstream license bytes and their recorded SHA-256 values.
+frontend/public/fonts/*OFL.txt -text whitespace=-blank-at-eol
+frontend/public/fonts/**/*OFL.txt -text whitespace=-blank-at-eol

@@ -1,0 +1,29 @@
+.annotation-panel { margin: 14px 0 18px; padding-bottom: 16px; border-bottom: 1px solid var(--separator); }
+.annotation-panel h3 { display: flex; align-items: center; gap: 7px; font-size: var(--text-body); }
+.annotation-panel p { font-size: var(--text-small); line-height: 1.5; color: var(--muted); margin-top: 9px; }
+.annotation-panel .comparison-outcome { display: flex; align-items: center; gap: 8px; color: var(--text); font-size: var(--text-section); }
+.comparison-outcome.missed, .comparison-outcome.extra, .comparison-outcome.mixed { color: var(--error); }
+.comparison-counts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 14px 0 0; }
+.comparison-counts dt { font-size: var(--text-small); color: var(--muted); }
+.comparison-counts dd { margin: 2px 0 0; font-size: var(--text-section); font-variant-numeric: tabular-nums; }
+.comparison-details { margin-top: 12px; font-size: var(--text-small); }
+.comparison-details summary { min-height: 32px; align-content: center; color: var(--text); }
+.comparison-details ul { padding-left: 20px; color: var(--muted); }
+.comparison-details li + li { margin-top: 8px; }
+.comparison-details dl { margin-bottom: 0; }
+.comparison-details dt { color: var(--muted); margin-top: 10px; }
+.comparison-details dd { margin: 2px 0 0; overflow-wrap: anywhere; }
+.comparison-retry { margin-top: 10px; }
+.annotation-box { pointer-events: none; }
+.annotation-box > rect:first-child { fill: none; stroke: #68e4eb; stroke-width: 2px; stroke-dasharray: 7 4; }
+.annotation-box > .annotation-label-background { fill: #68e4eb; stroke: none; }
+.annotation-box text { fill: #062f32; font-family: var(--font-ui); font-weight: 600; }
+.coordinate-key.annotation-key > span { border: 1px dashed currentColor; }
+.canvas-footer .canvas-legend { display: flex; flex-wrap: wrap; gap: 3px 12px; }
+.canvas-footer .comparison-viewer-status { color: var(--text); }
+.canvas-tools .annotation-toggle { width: auto; display: flex; gap: 6px; padding-inline: 10px; font-size: var(--text-small); }
+.canvas-tools:has(.annotation-toggle) { flex-wrap: wrap; height: auto; min-height: 40px; }
+@media (max-width: 420px) {
+  .canvas-tools .annotation-toggle { flex-basis: 100%; justify-content: center; min-height: 36px; padding-inline: 5px; gap: 4px; }
+  .canvas-tools .annotation-toggle svg { width: 15px; }
+}

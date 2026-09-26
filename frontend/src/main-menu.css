@@ -1,0 +1,101 @@
+.main-menu { flex: 1; min-height: 0; min-width: 0; width: 100%; padding: 24px 32px 0; overflow: auto; background: var(--bg); }
+.menu-setup { width: min(100%,1100px); margin: 0 auto; }
+.menu-heading { margin-bottom: 20px; }
+.menu-heading h1 { font-family: var(--font-heading); font-size: 2rem; font-weight: 500; line-height: 1.15; letter-spacing: -.015em; }
+.menu-heading > p:last-child { margin-top: 10px; color: var(--muted); font-size: var(--text-body); }
+.menu-busy { display: flex; align-items: flex-start; gap: 10px; padding: 13px 16px; margin-bottom: 20px; border: 1px solid var(--blue-line); background: var(--blue-tint); color: var(--text); font-size: var(--text-body); }
+.menu-busy svg { flex-shrink: 0; margin-top: 2px; color: var(--primary); }
+.menu-workbench { display: grid; grid-template-columns: 340px minmax(0,1fr); border-top: 1px solid var(--separator); border-bottom: 1px solid var(--separator); background: var(--surface); }
+.menu-setup fieldset { min-width: 0; margin: 0; padding: 0; border: 0; }
+.menu-setup legend { font-family: var(--font-heading); font-size: 1rem; font-weight: 500; padding: 0; margin-bottom: 14px; }
+.menu-setup input[type=radio], .menu-setup input[type=checkbox] { flex-shrink: 0; width: 17px; height: 17px; margin: 2px 0 0; accent-color: var(--primary); }
+.menu-setup label { cursor: pointer; }
+.menu-setup label:has(input:disabled) { cursor: not-allowed; }
+.menu-setup label:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: 4px; border-radius: 2px; }
+.menu-setup .menu-workflows { padding: 22px 18px; border-right: 1px solid var(--separator); }
+.menu-workflows legend { float: left; width: 100%; margin-bottom: 16px; color: var(--muted); }
+.menu-workflow { display: grid; grid-template-columns: 17px 20px minmax(0,1fr); gap: 11px; clear: both; padding: 16px 12px; margin: 0 -4px; border-left: 1px solid transparent; }
+.menu-workflow + .menu-workflow { margin-top: 7px; }
+.menu-workflow:hover:not(:has(input:disabled)) { background: var(--subtle); }
+.menu-workflow.is-selected { background: var(--subtle); border-left-color: var(--primary); }
+.menu-workflow > svg { color: var(--muted); margin-top: 1px; }
+.menu-workflow.is-selected > svg { color: var(--primary); }
+.menu-workflow-copy { display: grid; gap: 5px; min-width: 0; }
+.menu-workflow-copy strong { font-size: 1rem; font-weight: 500; line-height: 1.25; }
+.menu-workflow-copy > span { color: var(--muted); font-size: var(--text-small); line-height: 1.5; }
+.menu-workflow-copy small { margin-top: 3px; color: var(--quiet); font-size: var(--text-small); font-variant-numeric: tabular-nums; }
+.menu-options { min-width: 0; padding: 24px 28px; }
+.menu-context h2 { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 500; line-height: 1.25; margin-bottom: 10px; }
+.menu-context p { max-width: 66ch; color: var(--muted); font-size: var(--text-body); line-height: 1.6; }
+.menu-readiness { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 10px 14px; margin: 20px 0; padding-bottom: 20px; border-bottom: 1px solid var(--separator); font-size: var(--text-small); }
+.menu-readiness dt { color: var(--quiet); }
+.menu-readiness dd { margin: 0; overflow-wrap: anywhere; }
+.menu-readiness dd > span { display: block; margin-top: 3px; color: var(--muted); }
+.menu-notice { margin: 0 0 16px; font-size: var(--text-small); color: var(--muted); line-height: 1.6; }
+.menu-layout-list { display: grid; gap: 13px; }
+.menu-layout-list > label { display: flex; align-items: flex-start; gap: 10px; }
+.menu-layout-list strong { display: block; font-size: var(--text-body); font-weight: 500; }
+.menu-layout-list small { display: block; margin-top: 2px; color: var(--muted); font-size: var(--text-small); line-height: 1.5; }
+.menu-panel-options { margin-top: 16px; font-size: var(--text-small); color: var(--muted); }
+.menu-panel-options > summary { width: fit-content; padding: 4px 0; }
+.menu-panel-options > div { display: grid; gap: 10px; margin-top: 10px; }
+.menu-panel-options label { display: flex; align-items: center; gap: 9px; }
+.menu-setup .menu-run-options { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--separator); }
+.menu-threshold-heading { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 8px; font-size: var(--text-body); }
+.menu-threshold-heading output { color: var(--muted); font-variant-numeric: tabular-nums; }
+.menu-run-options > p { margin-top: 7px; color: var(--quiet); font-size: var(--text-small); }
+.menu-follow { display: flex; align-items: flex-start; gap: 10px; margin-top: 18px; font-size: var(--text-body); }
+.menu-follow small { display: block; color: var(--muted); margin-top: 3px; font-size: var(--text-small); line-height: 1.5; }
+.menu-launch { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 14px 0; border-top: 1px solid var(--separator); background: var(--bg); }
+.menu-launch-summary { min-width: 0; }
+.menu-launch-summary strong { font-family: var(--font-heading); font-size: 1.125rem; font-weight: 500; }
+.menu-launch-summary p { color: var(--muted); margin-top: 3px; font-size: var(--text-body); }
+.menu-launch-summary > span { display: block; margin-top: 6px; color: var(--quiet); font-size: var(--text-small); }
+.menu-launch-actions { display: flex; flex-direction: column; gap: 8px; flex-shrink: 0; }
+.menu-launch-actions > button { min-width: 188px; min-height: 42px; }
+.menu-utilities { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 24px; margin-top: 6px; }
+.menu-utilities > p { margin-left: auto; color: var(--quiet); font-size: var(--text-small); }
+.menu-utilities > button { min-height: 36px; }
+@media (min-width:1100px) and (min-height:650px) {
+  .main-menu { overflow: hidden; }
+  .menu-setup { display: flex; flex-direction: column; height: 100%; min-height: 0; }
+  .menu-heading, .menu-busy, .menu-utilities, .menu-launch { flex-shrink: 0; }
+  .menu-workbench { flex: 1; min-height: 0; }
+  .menu-setup .menu-workflows { min-height: 0; padding: 16px 18px; overflow: auto; scrollbar-width: thin; }
+  .menu-workflows legend { margin-bottom: 10px; }
+  .menu-workflow { padding-top: 9px; padding-bottom: 9px; }
+  .menu-workflow + .menu-workflow { margin-top: 3px; }
+  .menu-workflow-copy { gap: 3px; }
+  .menu-workflow-copy small { margin-top: 1px; }
+  .menu-options { min-height: 0; padding-top: 18px; padding-bottom: 18px; overflow: auto; scrollbar-width: thin; scroll-padding-block: 18px; outline-offset: -3px; }
+}
+@media (max-width:900px) {
+  .main-menu { padding: 28px 20px 0; }
+  .menu-workbench { grid-template-columns: 280px minmax(0,1fr); }
+  .menu-setup .menu-workflows { padding: 20px 14px; }
+  .menu-workflow { grid-template-columns: 17px minmax(0,1fr); gap: 10px; padding: 14px 10px; }
+  .menu-workflow > svg { display: none; }
+  .menu-options { padding: 22px 20px; }
+}
+@media (max-width:680px) {
+  .main-menu { padding: 26px 14px 20px; overflow: visible; scroll-padding-block: 20px; }
+  .menu-heading { margin-bottom: 22px; }
+  .menu-heading h1 { font-size: 2rem; }
+  .menu-workbench { grid-template-columns: minmax(0,1fr); }
+  .menu-setup .menu-workflows { padding: 18px 14px; border-right: 0; border-bottom: 1px solid var(--separator); }
+  .menu-workflows legend { margin-bottom: 12px; }
+  .menu-workflow { grid-template-columns: 17px 20px minmax(0,1fr); padding: 13px 10px; }
+  .menu-workflow > svg { display: block; }
+  .menu-workflow + .menu-workflow { margin-top: 3px; }
+  .menu-options { padding: 22px 18px; }
+  .menu-context h2 { font-size: 1.375rem; }
+  .menu-readiness { grid-template-columns: 62px minmax(0,1fr); gap: 10px; }
+  .menu-panel-options > summary { min-height: 40px; padding: 10px 0; }
+  .menu-panel-options label { min-height: 34px; }
+  .menu-layout-list { gap: 18px; }
+  .menu-launch { position: static; align-items: stretch; flex-direction: column; gap: 18px; padding: 20px 0; }
+  .menu-launch-actions > button { width: 100%; min-height: 44px; }
+  .menu-utilities { align-items: flex-start; gap: 8px 20px; }
+  .menu-utilities > p { flex-basis: 100%; margin-left: 0; margin-top: 4px; }
+  .menu-utilities > button { min-height: 44px; }
+}

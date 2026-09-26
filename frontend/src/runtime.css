@@ -1,0 +1,48 @@
+.runtime-settings {
+  border-top: 1px solid var(--separator);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.runtime-settings h3 { font-size: var(--text-section); }
+.runtime-state { margin-top: 8px; font-weight: 600; overflow-wrap: anywhere; }
+.runtime-verification { margin-top: 16px; }
+.runtime-verification .secondary-button { min-height: 44px; }
+.runtime-details { margin-top: 18px; font-size: var(--text-small); }
+.runtime-details dl { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 12px; }
+.runtime-details dt { color: var(--muted); }
+.runtime-details dd { margin: 0; overflow-wrap: anywhere; }
+.runtime-details code { white-space: nowrap; }
+.runtime-error { color: var(--error); margin-top: 12px; overflow-wrap: anywhere; }
+.execution-record dd { overflow-wrap: anywhere; }
+.runtime-device-selector { margin: 0 0 24px; padding-bottom: 22px; border-bottom: 1px solid var(--separator); }
+.runtime-device-selector h3 { font-size: var(--text-section); }
+.runtime-configuration-title { margin-bottom: 16px; }
+.runtime-current-model { margin-bottom: 5px; overflow-wrap: anywhere; }
+.runtime-model-selection { margin: 0 0 22px; }
+.runtime-model-selection > label { display: block; font-size: var(--text-section); font-weight: 600; margin-bottom: 8px; }
+.runtime-model-selection > select { width: 100%; min-width: 0; min-height: 44px; padding: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 6px; }
+.model-classes { margin-top: 12px; font-size: var(--text-small); overflow-wrap: anywhere; }
+.model-classes > p + p { margin-top: 6px; }
+.runtime-unavailable-models { margin-top: 12px; font-size: var(--text-small); }
+.runtime-unavailable-models ul { padding-left: 20px; }
+.runtime-unavailable-models li { margin-top: 8px; overflow-wrap: anywhere; }
+.runtime-current { font-size: var(--text-body); margin-bottom: 18px; overflow-wrap: anywhere; }
+.runtime-current small { display: block; margin-top: 4px; color: var(--muted); font-size: var(--text-small); }
+.runtime-device-cards { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+.runtime-device-card { display: grid; grid-template-columns: 17px 20px minmax(0,1fr); align-items: start; gap: 9px; min-height: 84px; padding: 14px 12px; border: 1px solid var(--line); border-radius: 12px; }
+.runtime-device-card.is-selected { border-color: var(--primary); background: var(--subtle); }
+.runtime-device-card:hover:not(:has(input:disabled)) { background: var(--subtle); }
+.runtime-device-card > svg { color: var(--muted); margin-top: 1px; }
+.runtime-device-card strong { display: block; font-size: var(--text-section); }
+.runtime-device-card small { display: block; margin-top: 5px; color: var(--muted); font-size: var(--text-small); overflow-wrap: anywhere; }
+.runtime-device-card small > span { display: block; margin-top: 4px; }
+.runtime-device-default { color: var(--text); font-weight: 600; }
+.runtime-gpu-list { display: grid; gap: 7px; margin-top: 14px; font-size: var(--text-small); }
+.runtime-gpu-list select { width: 100%; min-width: 0; min-height: 44px; padding: 8px; background: var(--surface); color: var(--text); border: 1px solid var(--line); border-radius: 6px; }
+.runtime-restart-warning { margin-top: 14px; font-size: var(--text-small); color: var(--muted); }
+.runtime-device-apply { min-height: 44px; margin-top: 12px; }
+@media (max-width:680px) {
+  .runtime-device-cards { grid-template-columns: minmax(0,1fr); }
+  .runtime-device-card { min-height: 72px; }
+  .runtime-device-apply { width: 100%; }
+}
