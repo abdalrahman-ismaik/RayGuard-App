@@ -1,5 +1,16 @@
 # App engineering record
 
+## Report screenshots — 23 November 2026
+
+Claude (AI agent) captured 12 synthetic-fixture screenshots for the final report at
+Mohammad's request; Mohammad reviewed and committed them. Files and captions:
+`docs/images/report/`. Six states (intake, explicit run, prediction vs reference,
+empty result, failed run with model unavailable, session history), each in Onyx and
+Onyx Light. Captured with a git-ignored Playwright script (installed Chrome, 1440x900,
+2x) and API routes fulfilled by fixtures; all 12 captures passed and each image was
+visually inspected. Limitations: synthetic UI states only; no scans, inference, model
+performance, hardware or human-acceptance evidence.
+
 ## T43 publication preparation — 23 November 2026
 
 Codex (AI agent) drafted the four T43 app files and docs at Mohammad's request.
