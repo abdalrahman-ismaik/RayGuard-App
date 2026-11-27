@@ -96,7 +96,7 @@ function Stop-PreviousRayGuard {
 
 try {
     if (-not (Test-Path -LiteralPath (Join-Path $engineRoot 'pyproject.toml') -PathType Leaf)) {
-        throw 'The pinned engine is missing. Run git submodule update --init --recursive from this checkout, then rerun the launcher.'
+        throw 'The engine folder is missing. Restore it with git checkout -- engine, or clone the RayGuard App again.'
     }
     if ($explicitConfig) {
         $Config = [System.IO.Path]::GetFullPath($Config)

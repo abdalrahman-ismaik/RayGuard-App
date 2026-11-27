@@ -11,10 +11,10 @@ on the local RTX 2060. Additional laptops and CPU hosts remain unverified.
 ## Repository boundary after extraction — 27 September 2026
 
 This repository owns `frontend/`, `backend/`, the launcher, configuration
-example, app tests and documentation. `engine/` is the pinned Git submodule
-of SDP-I-RayGuard; it owns contracts, the model catalog, runner scripts and
-reviewed model-environment locks. The backend dependency resolves to that
-checkout. Runtime fingerprints include both engine and app adapter sources.
+example, app tests and documentation. Since 27 November 2026 `engine/` is a
+regular folder of this repository (copied from SDP-I-RayGuard, previously a Git
+submodule); it holds contracts, the model catalog, runner scripts and reviewed
+model-environment locks. The backend dependency resolves to that folder. Runtime fingerprints include both engine and app adapter sources.
 A changed checkout needs its own model qualification; historical SDP runs
 are not a qualification of this extracted app. Data, weights, environments
 and machine-local configs remain outside published source.

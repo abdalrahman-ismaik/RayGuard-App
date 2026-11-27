@@ -1,0 +1,14 @@
+{
+  "info": {"description": "Synthetic software fixture only; arbitrary categories are not IEDXray labels."},
+  "images": [
+    {"id": 1, "file_name": "positive.png", "width": 64, "height": 48, "synthetic_group": "fixture-a"},
+    {"id": 2, "file_name": "negative.png", "width": 64, "height": 48, "synthetic_group": "fixture-b"}
+  ],
+  "categories": [
+    {"id": 101, "name": "SYNTHETIC_WIDGET"},
+    {"id": 205, "name": "SYNTHETIC_MARK"}
+  ],
+  "annotations": [
+    {"id": 1, "image_id": 1, "category_id": 205, "bbox": [8, 10, 12, 6]}
+  ]
+}

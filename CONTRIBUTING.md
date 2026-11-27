@@ -6,10 +6,11 @@ backlog remain in [SDP-I-RayGuard](https://github.com/abdalrahman-ismaik/SDP-I-R
 Use an existing task ID and agree file ownership before parallel edits. A branch
 name or generated change does not establish a student's contribution or understanding.
 
-Clone recursively, or run `git submodule update --init --recursive` before setup.
-The `engine/` submodule is a pinned dependency. Change contracts, detector scripts,
-model catalog and runtime locks in SDP first; review a specific engine commit here
-and rerun the affected checks. Do not use an unpinned tracking-branch update.
+A normal clone is enough; `engine/` is part of this repository. Changes to
+contracts, detector scripts, model catalog or runtime locks are made in `engine/`
+and need the engine checks (`uv run --project engine --locked ruff check engine`
+and `uv run --project engine --locked python -m pytest engine/tests`) as well as
+the backend checks.
 
 From this repository root, install and check the API:
 

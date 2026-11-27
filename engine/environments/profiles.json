@@ -1,0 +1,113 @@
+{
+  "cpu": {
+    "id": "win-x64-py311-torch290-cpu-v1",
+    "backend": "cpu",
+    "enabled": true,
+    "python": "3.11.9",
+    "lock": "windows-cpu.lock",
+    "lock_sha256": "960e670a63c02c8bdf92584b5d0251857863d4b5e20e578e62e92d071d8e2815",
+    "build_lock": "build.lock",
+    "build_lock_sha256": "621897fb5c8bb3bd4eeb7da24e0f7b82cae059f045cd6214169e59163777281e",
+    "download_bytes": 246048919,
+    "minimum_driver": "0.0",
+    "architecture_minors": {},
+    "qualification": "required",
+    "fork_commit": "453c6e38a51e9d1d5a2aa5fb7f1014a711913397",
+    "os": "Windows",
+    "architecture": "x86_64",
+    "python_abi": "cp311",
+    "torch_version": "2.9.0+cpu",
+    "torchvision_version": "0.24.0+cpu",
+    "precision": "ieee-fp32",
+    "source_hosts": [
+      "files.pythonhosted.org",
+      "download.pytorch.org",
+      "github.com",
+      "codeload.github.com"
+    ],
+    "qualification_status": "reviewed_candidate",
+    "qualification_evidence": "environments/README.md",
+    "fork_source": {
+      "url": "https://github.com/THU-MIG/yolov10/archive/453c6e38a51e9d1d5a2aa5fb7f1014a711913397.tar.gz",
+      "sha256": "ac5262ab1c7f2ad916496cdf6a00cad62cc5d92c2c6254833d9282d26d4e728f"
+    }
+  },
+  "cu126": {
+    "id": "win-x64-py311-torch290-cu126-v1",
+    "backend": "cu126",
+    "enabled": true,
+    "python": "3.11.9",
+    "lock": "windows-cu126.lock",
+    "lock_sha256": "95dc3ea79e950a2f18aff49d732d1441e00ae5e2f49a563b6a644e7875b2fef3",
+    "build_lock": "build.lock",
+    "build_lock_sha256": "621897fb5c8bb3bd4eeb7da24e0f7b82cae059f045cd6214169e59163777281e",
+    "download_bytes": 2724053903,
+    "minimum_driver": "561.17",
+    "architecture_minors": {
+      "5": 0,
+      "6": 0,
+      "7": 0,
+      "8": 0,
+      "9": 0
+    },
+    "qualification": "required",
+    "fork_commit": "453c6e38a51e9d1d5a2aa5fb7f1014a711913397",
+    "os": "Windows",
+    "architecture": "x86_64",
+    "python_abi": "cp311",
+    "torch_version": "2.9.0+cu126",
+    "torchvision_version": "0.24.0+cu126",
+    "precision": "ieee-fp32",
+    "source_hosts": [
+      "files.pythonhosted.org",
+      "download.pytorch.org",
+      "github.com",
+      "codeload.github.com"
+    ],
+    "qualification_status": "reviewed_candidate",
+    "qualification_evidence": "environments/README.md",
+    "fork_source": {
+      "url": "https://github.com/THU-MIG/yolov10/archive/453c6e38a51e9d1d5a2aa5fb7f1014a711913397.tar.gz",
+      "sha256": "ac5262ab1c7f2ad916496cdf6a00cad62cc5d92c2c6254833d9282d26d4e728f"
+    }
+  },
+  "cu128": {
+    "id": "win-x64-py311-torch290-cu128-v1",
+    "backend": "cu128",
+    "enabled": false,
+    "python": "3.11.9",
+    "lock": "windows-cu128.lock",
+    "lock_sha256": "fcc7ca257f774df09ec8b803c9e42b8788ffba6a68b3d9649c1917b660300edc",
+    "build_lock": "build.lock",
+    "build_lock_sha256": "621897fb5c8bb3bd4eeb7da24e0f7b82cae059f045cd6214169e59163777281e",
+    "download_bytes": 3002408938,
+    "minimum_driver": "572.61",
+    "architecture_minors": {
+      "7": 0,
+      "8": 0,
+      "9": 0,
+      "10": 0,
+      "12": 0
+    },
+    "qualification": "required",
+    "fork_commit": "453c6e38a51e9d1d5a2aa5fb7f1014a711913397",
+    "os": "Windows",
+    "architecture": "x86_64",
+    "python_abi": "cp311",
+    "torch_version": "2.9.0+cu128",
+    "torchvision_version": "0.24.0+cu128",
+    "precision": "ieee-fp32",
+    "source_hosts": [
+      "files.pythonhosted.org",
+      "download.pytorch.org",
+      "github.com",
+      "codeload.github.com"
+    ],
+    "qualification_status": "disabled_candidate",
+    "qualification_evidence": "environments/README.md",
+    "fork_source": {
+      "url": "https://github.com/THU-MIG/yolov10/archive/453c6e38a51e9d1d5a2aa5fb7f1014a711913397.tar.gz",
+      "sha256": "ac5262ab1c7f2ad916496cdf6a00cad62cc5d92c2c6254833d9282d26d4e728f"
+    }
+  }
+}

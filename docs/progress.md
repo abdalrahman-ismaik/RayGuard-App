@@ -119,3 +119,24 @@ all 149 browser checks
 Research tasks and showcase acceptance remain open in the linked SDP backlog.
 Next action: use the new walkthrough to introduce the app, then rehearse with
 the authorized research diagnostics on the actual presentation laptop.
+
+## Self-contained repository and tuned model — 27 November 2026
+
+The owner asked for the app to be independent of the SDP repository and for the
+tuned model to be available to examiners.
+
+- Replaced the `engine/` submodule with a regular folder: SDP revision `b7ec59e`
+  plus the tuned catalogue entry from `83961d2`. Research docs, agent skills and
+  SDP CI were not copied. `rayguard_gui.engine` now checks the bundled files and
+  package origin instead of a gitlink; CI runs engine lint and tests.
+- Catalogue entry `author-yolov10m-generic-tuned` (`epoch-084.pt`, SHA-256
+  `097ff71e…f65f8`). Model-policy tests now expect four selectable YOLOv10-M entries.
+- Published `epoch-084.pt` as release asset `tuned-model-v1` (IEDXray, CC BY 4.0).
+  `scripts/get-tuned-model.ps1` downloads it to ignored `models/` and checks the hash.
+  The untuned author checkpoints are not redistributed.
+- Launcher stops only this checkout's earlier RayGuard processes (PR #2).
+
+Checks: backend Ruff passed, 283 backend tests passed; engine Ruff passed, 143
+engine tests passed. Real CPU run on the owner's laptop: release download hash
+matched, app model verification passed, Test001489 one detection (0.954),
+Test000001 and Test003370 none. Browser checks were left to CI.

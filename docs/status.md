@@ -1,7 +1,9 @@
 # App status
 
 Updated 27 September 2026. The application has been extracted into its own public
-repository, with SDP engine commit `b7ec59e` pinned as a submodule. Original local
+repository. Since 27 November 2026 the engine is bundled in `engine/` (no
+submodule), and the fine-tuned generic model is selectable and downloadable from
+release `tuned-model-v1`. Original local
 files and services are preserved; GUI development now belongs here.
 
 Upload, folder receipt, finite IEDXray replay, inspection/reference overlays,

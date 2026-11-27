@@ -70,4 +70,4 @@ def test_missing_engine_stops_before_tools_or_installation(tmp_path):
          str(tmp_path / "run-app.ps1")], capture_output=True, text=True, timeout=15,
     )
     assert result.returncode == 1
-    assert "git submodule update --init --recursive" in result.stdout
+    assert "git checkout -- engine" in result.stdout

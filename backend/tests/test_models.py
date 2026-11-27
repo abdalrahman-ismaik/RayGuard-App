@@ -22,6 +22,7 @@ from rayguard_gui.runtime_policy import PolicyStore
 
 DEVICE_MODEL = "author-yolov10m-device"
 SPECIFIC_MODEL = "author-yolov10m-specific"
+TUNED_MODEL = "author-yolov10m-generic-tuned"
 
 
 @pytest.fixture
@@ -75,14 +76,15 @@ def test_map_only_config_selects_model_and_preserves_all_paths(models, tmp_path)
     assert switched.model_python == settings.model_python
 
 
-def test_only_three_inspected_models_are_selectable_and_missing_hash_stays_disabled(models):
+def test_only_catalogued_models_are_selectable_and_missing_hash_stays_disabled(models):
     models.settings.model_checkpoints[DEVICE_MODEL].write_bytes(b"wrong checkpoint")
     with TestClient(create_app(models.settings, policy_store=models.store), base_url="http://127.0.0.1") as client:
         session = client.app.state.session
         session.pool.finish()
         options = client.get("/api/health").json()["runtime"]["choices"]["model_options"]
-        assert len(options) == 8
-        assert {row["id"] for row in options if row["selectable"]} == {DEFAULT_MODEL_ID, SPECIFIC_MODEL}
+        assert len(options) == 9
+        assert {row["id"] for row in options if row["selectable"]} == {
+            DEFAULT_MODEL_ID, TUNED_MODEL, SPECIFIC_MODEL}
         assert all(not row["selectable"] for row in options if row["family"] != "YOLOv10-M")
         assert select(client, DEVICE_MODEL).status_code == 409
         assert select(client, "unverified-detr").status_code == 409
@@ -140,6 +142,7 @@ def test_each_model_routes_its_names_kind_and_recorded_identity(models, model_id
         exported = client.get(f"/api/runs/{run['id']}/export").json()
         assert exported["run"]["model"] == run["model"]
         scopes = {DEFAULT_MODEL_ID: "Generic explosive localization only.",
+                  TUNED_MODEL: "Generic explosive localization only.",
                   DEVICE_MODEL: "Electronic-device localization only; device presence does not establish an explosive threat.",
                   SPECIFIC_MODEL: "Class-specific suspicious-region localization only; these labels are not a whole-device safety classification."}
         assert exported["limitations"][1] == f"{scopes[model_id]} Full P1/P2 are not implemented."

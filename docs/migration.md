@@ -19,6 +19,13 @@ installed package origin. Backend dependencies use the editable `../engine`
 source. Core changes belong in SDP first; an app dependency update requires an
 explicit gitlink change and corresponding checks.
 
+**Update, 27 November 2026:** the submodule was replaced by a regular `engine/`
+folder so the app no longer depends on the SDP repository. Its files come from SDP
+revision `b7ec59e` plus the tuned-model catalogue entry from `83961d2`; research
+docs, agent skills and SDP CI were not copied. Startup now checks that the bundled
+engine files exist and that the installed package comes from this checkout. The
+records below describe the submodule period.
+
 The app was unpublished working-tree content in the original checkout. A private
 snapshot preserved all 242 Git-visible source files, their sizes and hashes,
 working/index patches and a Git history bundle before extraction. The initial

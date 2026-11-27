@@ -75,7 +75,7 @@ See the [design and behavior record](eye-animation-plan.md) and
 ## Start locally
 
 See [the current clone instructions](../README.md#clone-and-start) first. The
-engine submodule must be initialized at its recorded revision.
+engine is part of this repository; no submodule setup is needed.
 
 
 Prerequisites: Python 3.12, [uv](https://docs.astral.sh/uv/) and Node **22.12+**
@@ -450,7 +450,7 @@ The [research record](scanner-research.md) separates vendor claims from verified
 
 - `frontend/`: React/TypeScript UI, local assets, browser tests and npm lock.
 - `backend/`: FastAPI service/adapter, synthetic tests and separate uv lock.
-- `engine/`: pinned SDP submodule with shared contracts, model catalog,
+- `engine/`: bundled engine with shared contracts, model catalog,
   inference scripts and reviewed model runtime profiles.
 - `docs/`: app decisions, usage and dated evidence; the SDP backlog stays upstream.
 - `run-app.ps1`, `config.example.json`: local Windows launch and configuration.

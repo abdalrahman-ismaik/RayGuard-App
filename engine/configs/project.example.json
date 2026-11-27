@@ -1,0 +1,10 @@
+{
+  "dataset_root": null,
+  "annotations": null,
+  "checkpoint": null,
+  "model_config": null,
+  "class_map": null,
+  "task": null,
+  "upstream_revision": null,
+  "physical_group_key": null
+}
