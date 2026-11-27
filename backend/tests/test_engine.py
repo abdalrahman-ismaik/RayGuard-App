@@ -1,7 +1,5 @@
-"""Source extraction checks; local Git fixtures contain no models or research data."""
+"""Bundled engine checks; fixtures contain no models or research data."""
 
-import shutil
-import subprocess
 from types import SimpleNamespace
 
 import pytest
@@ -13,77 +11,43 @@ from rayguard_gui.config import APP_ROOT, REPOSITORY, Settings
 
 @pytest.fixture
 def checkout(tmp_path, monkeypatch):
-    if shutil.which("git") is None:
-        pytest.skip("Git is required to exercise the submodule checkout guard")
     source = tmp_path / "engine"
-    for name in ("pyproject.toml", "src/sdp_xray/model_catalog.py",
-                 "scripts/infer_generic_yolov10.py", "scripts/setup_model_runtime.py",
-                 "environments/profiles.json"):
+    for name in engine.REQUIRED:
         path = source / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.touch()
-
-    def git(directory, *args):
-        return subprocess.run(["git", "-C", str(directory), *args], check=True,
-                              capture_output=True, text=True).stdout.strip()
-
-    git(tmp_path, "init")
-    git(source, "init")
-    git(source, "add", ".")
-    git(source, "-c", "user.name=Software fixture", "-c", "user.email=fixture@example.invalid",
-        "commit", "-m", "Synthetic engine fixture")
-    revision = git(source, "rev-parse", "HEAD")
-    git(tmp_path, "update-index", "--add", "--cacheinfo", f"160000,{revision},engine")
     monkeypatch.setattr(engine, "APP_ROOT", tmp_path)
     monkeypatch.setattr(engine, "REPOSITORY", source)
     monkeypatch.setattr(engine.importlib.util, "find_spec", lambda name: SimpleNamespace(
         origin=str(source / "src/sdp_xray/__init__.py")))
-    return tmp_path, source, revision, git
+    return tmp_path, source
 
 
-def test_pin_is_valid_before_first_app_commit_and_ignores_local_artifacts(checkout):
-    _, source, revision, _ = checkout
-    (source / ".venv").mkdir()
-    (source / ".venv/local-cache").touch()
-    assert engine.verify_engine() == revision
+def test_bundled_engine_is_accepted_without_git(checkout):
+    _, source = checkout
+    assert engine.verify_engine() == str(source)
 
 
-def test_missing_engine_has_initialization_instruction(checkout):
-    _, source, _, _ = checkout
-    (source / "pyproject.toml").unlink()
-    with pytest.raises(ValueError, match="git submodule update --init --recursive"):
-        engine.verify_engine()
+def test_real_checkout_ships_the_engine_in_this_repository():
+    assert not (APP_ROOT / ".gitmodules").exists()
+    for name in engine.REQUIRED:
+        assert (REPOSITORY / name).is_file(), name
+    assert engine.verify_engine() == str(REPOSITORY)
 
 
-def test_mismatched_gitlink_revision_is_rejected(checkout):
-    root, _, _, git = checkout
-    git(root, "update-index", "--cacheinfo", f"160000,{'1' * 40},engine")
-    with pytest.raises(ValueError, match="differs from the app's pinned revision"):
-        engine.verify_engine()
-
-
-@pytest.mark.parametrize("staged", [False, True])
-def test_modified_engine_source_is_rejected(checkout, staged):
-    _, source, _, git = checkout
-    (source / "scripts/infer_generic_yolov10.py").write_text("# changed\n")
-    if staged:
-        git(source, "add", ".")
-    with pytest.raises(ValueError, match="Tracked engine files have local changes"):
-        engine.verify_engine()
-
-
-def test_missing_gitlink_is_rejected(checkout):
-    root, _, _, git = checkout
-    git(root, "update-index", "--force-remove", "engine")
-    with pytest.raises(ValueError, match="no unambiguous engine gitlink pin"):
+@pytest.mark.parametrize("name", engine.REQUIRED)
+def test_missing_engine_file_has_restore_instruction(checkout, name):
+    _, source = checkout
+    (source / name).unlink()
+    with pytest.raises(ValueError, match="git checkout -- engine"):
         engine.verify_engine()
 
 
 def test_dependency_from_another_checkout_is_rejected(checkout, monkeypatch):
-    root, _, _, _ = checkout
+    root, _ = checkout
     monkeypatch.setattr(engine.importlib.util, "find_spec", lambda name: SimpleNamespace(
         origin=str(root / "unrelated/sdp_xray/__init__.py")))
-    with pytest.raises(ValueError, match="not this checkout's pinned engine"):
+    with pytest.raises(ValueError, match="not this checkout's engine"):
         engine.verify_engine()
 
 

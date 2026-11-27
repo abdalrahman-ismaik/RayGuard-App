@@ -56,42 +56,41 @@ for the distinction between app work, team research and upstream models/assets.
 
 The [SDP-I-RayGuard project](https://github.com/abdalrahman-ismaik/SDP-I-RayGuard)
 remains the source of research requirements, the team backlog, prediction contracts
-and detector tooling. This repository owns the application. Its `engine/` submodule
-pins the compatible SDP dependency; do not maintain another copy of that code.
+and the training study. This repository is self-contained: the inference engine
+lives in its own [`engine/`](engine/README.md) folder (copied from SDP on 27 November
+2026), so the app needs no SDP checkout and no Git submodule.
 
 ## Latest updates (27 November 2026)
 
 - **Fresh start on every launch.** `run-app.ps1` stops earlier RayGuard processes
   (and their child processes) before it starts. Another program on the chosen port
   stops the launch with a message instead of being stopped.
-- **Tuned generic detector (local demo entry).** A catalogue entry for the
-  fine-tuned Generic Explosive checkpoint is in engine pull request
-  [SDP-I-RayGuard #33](https://github.com/abdalrahman-ismaik/SDP-I-RayGuard/pull/33)
-  (draft). It becomes usable in this app only after the engine pin is updated.
+- **Self-contained repository.** The engine is part of this repository instead of
+  a Git submodule. A normal `git clone` is enough.
+- **Tuned generic detector.** The fine-tuned Generic Explosive checkpoint is
+  selectable in the app and published as a
+  [release asset](https://github.com/abdalrahman-ismaik/RayGuard-App/releases/tag/tuned-model-v1).
   See [Tuned model](#tuned-model) below.
-- **Untuned generic detector remains the default** and is the model to use with a
-  configuration that has not been changed.
 - **Verification on 27 November:** the engine suite (143 tests) and the launcher
   tests passed. The untuned detector was run on three published test scans from
   this checkout: Test001489 gave one detection (score 0.916); Test000001 (a known
   miss) and Test003370 (an empty result) gave none. A three-image dataset replay
-  completed. The tuned checkpoint was loaded through its hash-checked loader; a full
-  scan with the tuned entry has not yet run through the app.
+  completed. With the tuned model downloaded from the release, the app's model
+  verification passed and the same three scans gave: Test001489 one detection
+  (score 0.954), Test000001 and Test003370 none.
 
 ## Clone and start
 
 Install Git, Python 3.12, [uv](https://docs.astral.sh/uv/) and Node.js 22.12 or newer.
 
 ```powershell
-git clone --recurse-submodules https://github.com/abdalrahman-ismaik/RayGuard-App.git
+git clone https://github.com/abdalrahman-ismaik/RayGuard-App.git
 cd RayGuard-App
 ```
 
-For an existing clone, initialize the recorded engine revision:
-
-```powershell
-git submodule update --init --recursive
-```
+A clone made before 27 November 2026 still has the old submodule. Run
+`git pull`, then delete the empty `engine` folder if Git reports it, and run
+`git checkout -- engine`.
 
 On Windows, run `./run-app.ps1` from PowerShell. It builds the locked frontend and
 starts one local API service. The normal address is <http://127.0.0.1:8765>;
@@ -115,7 +114,7 @@ Weights, datasets, private configuration and prior sessions are not in this repo
 ## Portable CPU and NVIDIA inference
 
 The Windows launcher can prepare the reviewed isolated CPU/NVIDIA environments
-through the pinned engine. With no local configuration it follows the managed
+through the bundled engine. With no local configuration it follows the managed
 setup path; `-SetupModel` explicitly prepares it again. This can download model
 dependencies, but never checkpoints or datasets. Other platforms/vendors need
 independent qualification; web/API installation alone does not qualify inference.
@@ -124,8 +123,8 @@ Copy [config.example.json](config.example.json) to ignored `config.local.json`
 and provide authorized checkpoint and model-interpreter paths, or configure the
 managed local file produced by setup. Paths resolve relative to the config file.
 Use the pinned original YOLOv10 backend and exact catalog-bound artifacts.
-The three supported task models are Generic Explosive, Electronic Devices and
-Specific Explosives; their class meanings remain distinct.
+The supported models are Generic Explosive (untuned and fine-tuned), Electronic
+Devices and Specific Explosives; their class meanings remain distinct.
 
 In **Workspace setup → Model & compute**, select the model and CPU/GPU together,
 then **Apply and restart**. Real model verification is a separate explicit action.
@@ -141,15 +140,23 @@ The tuned model is the fine-tuned Generic Explosive detector from the SDP I stud
 
 - **Checkpoint:** `epoch-084.pt`, 132,945,129 bytes, SHA-256
   `097ff71eb741ce51ba053bc77512ba0916772c69ae8b4d7d50c0ef497e3f65f8`.
-- **Weights are not in this repository.** Obtain the file from the project owner
-  and place it in an ignored local folder (for example `data/IEDXray/model-weights/`
-  in the SDP repository). Check the SHA-256 before use.
-- **Loading** needs the pinned THU-MIG YOLOv10 fork (commit
-  `453c6e38a51e9d1d5a2aa5fb7f1014a711913397`) in an isolated environment and the
-  hash-scoped loader in the SDP repository (`src/sdp_xray/training_checkpoint.py`).
-  The loader only loads this exact file; it does not change it.
-- **Status:** the catalogue entry is in engine PR #33 (draft). Until it is reviewed
-  and this app's engine pin moves to it, the launcher will not run the tuned model.
+- **Download:** the file is too large for Git, so it is a
+  [release asset](https://github.com/abdalrahman-ismaik/RayGuard-App/releases/tag/tuned-model-v1).
+  From the app root run `./scripts/get-tuned-model.ps1`. It saves the file to the
+  ignored `models/epoch-084.pt` and checks the SHA-256.
+- **Configure:** in `config.local.json` set `"model_id": "author-yolov10m-generic-tuned"`,
+  `"checkpoint": "models/epoch-084.pt"` and the SHA-256 above as
+  `"checkpoint_sha256"`. Prepare the model environment as described above
+  (`./run-app.ps1 -SetupModel`), start the app, then run **Verify model** once in
+  **Workspace setup → Model & compute**.
+- **Loading** uses the THU-MIG YOLOv10 fork (commit
+  `453c6e38a51e9d1d5a2aa5fb7f1014a711913397`) in the isolated environment. The
+  bundled inference script allows full-object loading only for this exact path
+  and hash; it never changes the file.
+- **Data and licence:** fine-tuned on the IEDXray dataset
+  ([CC BY 4.0](https://doi.org/10.6084/m9.figshare.30784328)). The three untuned
+  author checkpoints are not redistributed here; see
+  [engine/models/README.md](engine/models/README.md).
 
 ## Use and develop
 
@@ -163,7 +170,8 @@ and [current status](docs/status.md) describe the implementation and checks.
 | `run-app.ps1` | Single Windows launch entry point |
 | `frontend/` | Dashboard, scan viewer, styles and browser tests |
 | `backend/` | Local API, acquisition, model adapter and API tests |
-| `engine/` | Pinned SDP contracts, detector tooling and runtime profiles |
+| `engine/` | Bundled contracts, model catalogue, inference scripts and runtime profiles |
+| `scripts/` | Helper scripts, such as downloading the tuned model |
 | `docs/` | Architecture, usage, design decisions and verification |
 | `config.example.json` | Portable configuration template; local copies stay ignored |
 

@@ -40,4 +40,4 @@ or test output are not source files and must remain outside Git.
 
 The frontend moved unchanged from the SDP app directory during extraction.
 Screenshot paths now resolve under this repository's ignored `output/`;
-the engine submodule and backend stay separate from browser test fixtures.
+the bundled engine and backend stay separate from browser test fixtures.

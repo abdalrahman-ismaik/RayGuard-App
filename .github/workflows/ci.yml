@@ -12,7 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          submodules: recursive
           persist-credentials: false
       - uses: actions/setup-python@v7
         with:
@@ -21,6 +20,9 @@ jobs:
       - run: uv sync --project backend --locked
       - run: uv run --project backend --locked ruff check backend
       - run: uv run --project backend --locked python -m pytest backend/tests
+      - run: uv sync --project engine --locked
+      - run: uv run --project engine --locked ruff check engine
+      - run: uv run --project engine --locked python -m pytest engine/tests
   browser:
     name: Browser
     runs-on: ubuntu-latest
@@ -30,7 +32,6 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          submodules: recursive
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:

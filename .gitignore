@@ -64,3 +64,12 @@ GEMINI.md
 .vscode/
 .DS_Store
 Thumbs.db
+
+# The bundled engine keeps its usage notes in Git
+!engine/data/
+engine/data/*
+!engine/data/README.md
+!engine/models/
+engine/models/*
+!engine/models/README.md
+!engine/src/sdp_xray/data/

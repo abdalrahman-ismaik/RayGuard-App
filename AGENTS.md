@@ -5,8 +5,9 @@ This application was extracted from SDP-I-RayGuard. Research requirements and th
 team backlog remain authoritative in the linked SDP repository; do not invent a
 new advisor requirement or student contribution.
 
-- The engine/ Git submodule is the pinned SDP inference dependency. Do not edit
-  or duplicate its contracts, model catalog, scripts or environment locks here.
+- engine/ is this repository's own inference engine (copied from SDP on
+  27 November 2026; no submodule). Change contracts, model catalog, scripts and
+  environment locks there with engine tests; do not keep a second copy elsewhere.
 - Keep image/run/model identity and published annotations separate. Empty
   detections never imply a safe item. No training, dataset changes or hardware
   claims are implied by a browser feature or synthetic test.
