@@ -97,7 +97,7 @@ On Windows, run `./run-app.ps1` from PowerShell. It builds the locked frontend a
 starts one local API service. The normal address is <http://127.0.0.1:8765>;
 Ctrl+C stops the service. Each launch first stops RayGuard processes left by an
 earlier launch and then starts a fresh session; only processes whose command line
-names the RayGuard service are stopped. `-Port`, `-Config`
+names the RayGuard service and this checkout are stopped. `-Port`, `-Config`
 and `-SkipBuild` support another port, an explicit local config and a previously
 built frontend. Model/device changes use the app's deliberate restart flow.
 

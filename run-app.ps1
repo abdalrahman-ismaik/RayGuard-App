@@ -28,16 +28,28 @@ function Invoke-Checked {
 
 # Every launch starts fresh. Stop RayGuard service processes left by earlier launches,
 # including their child processes and whatever holds the port. Only processes whose
-# command line names the RayGuard service are stopped; any other program on the port
-# stops the launch with an error.
+# command line names the RayGuard service and this checkout are stopped; any other
+# program on the port stops the launch with an error.
 function Stop-PreviousRayGuard {
-    param([int]$Port)
+    param([int]$Port, [string]$AppRoot)
+    # Process discovery uses Windows-only commands; other platforms rely on the port probe.
+    if ($PSVersionTable.PSEdition -eq 'Core' -and -not $IsWindows) { return }
     $self = $PID
     $marker = 'rayguard[-_]gui'
-    $all = @(Get-CimInstance Win32_Process)
+    try {
+        $all = @(Get-CimInstance Win32_Process -ErrorAction Stop)
+    } catch {
+        return
+    }
+    # Only this checkout's service counts, so another checkout or a test run is never stopped.
+    $isOurs = {
+        param($process)
+        $line = [string]$process.CommandLine
+        $line -match $marker -and $line.IndexOf($AppRoot, [System.StringComparison]::OrdinalIgnoreCase) -ge 0
+    }
     $targets = @{}
     foreach ($process in $all) {
-        if ($process.ProcessId -ne $self -and $process.CommandLine -match $marker) {
+        if ($process.ProcessId -ne $self -and (& $isOurs $process)) {
             $targets[[int]$process.ProcessId] = $true
         }
     }
@@ -51,7 +63,7 @@ function Stop-PreviousRayGuard {
     foreach ($listener in $listeners) {
         $owner = $all | Where-Object { $_.ProcessId -eq $listener } | Select-Object -First 1
         if ($null -eq $owner) { continue }
-        if ($owner.CommandLine -match $marker) {
+        if (& $isOurs $owner) {
             $targets[[int]$listener] = $true
         } else {
             throw "Port $Port is used by another program (PID $listener). Choose another port, for example: .\run-app.ps1 -Port 8766"
@@ -102,7 +114,7 @@ try {
     }
 
     # Stop earlier RayGuard processes so every launch starts a fresh session.
-    Stop-PreviousRayGuard -Port $Port
+    Stop-PreviousRayGuard -Port $Port -AppRoot $appRoot
     $probe = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $Port)
     try {
         $probe.Start()
