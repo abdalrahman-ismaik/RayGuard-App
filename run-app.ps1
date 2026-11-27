@@ -26,6 +26,62 @@ function Invoke-Checked {
     }
 }
 
+# Every launch starts fresh. Stop RayGuard service processes left by earlier launches,
+# including their child processes and whatever holds the port. Only processes whose
+# command line names the RayGuard service are stopped; any other program on the port
+# stops the launch with an error.
+function Stop-PreviousRayGuard {
+    param([int]$Port)
+    $self = $PID
+    $marker = 'rayguard[-_]gui'
+    $all = @(Get-CimInstance Win32_Process)
+    $targets = @{}
+    foreach ($process in $all) {
+        if ($process.ProcessId -ne $self -and $process.CommandLine -match $marker) {
+            $targets[[int]$process.ProcessId] = $true
+        }
+    }
+    $listeners = @()
+    try {
+        $listeners = @(Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction Stop |
+            ForEach-Object { [int]$_.OwningProcess } | Sort-Object -Unique)
+    } catch {
+        $listeners = @()
+    }
+    foreach ($listener in $listeners) {
+        $owner = $all | Where-Object { $_.ProcessId -eq $listener } | Select-Object -First 1
+        if ($null -eq $owner) { continue }
+        if ($owner.CommandLine -match $marker) {
+            $targets[[int]$listener] = $true
+        } else {
+            throw "Port $Port is used by another program (PID $listener). Choose another port, for example: .\run-app.ps1 -Port 8766"
+        }
+    }
+    if ($targets.Count -eq 0) { return }
+    # uv starts the Python service as a child process, so stop the whole tree.
+    $queue = [System.Collections.Generic.Queue[int]]::new()
+    foreach ($key in @($targets.Keys)) { $queue.Enqueue([int]$key) }
+    while ($queue.Count -gt 0) {
+        $parent = $queue.Dequeue()
+        foreach ($child in @($all | Where-Object { $_.ParentProcessId -eq $parent })) {
+            if ($child.ProcessId -ne $self -and -not $targets.ContainsKey([int]$child.ProcessId)) {
+                $targets[[int]$child.ProcessId] = $true
+                $queue.Enqueue([int]$child.ProcessId)
+            }
+        }
+    }
+    Write-Host "Stopping $($targets.Count) earlier RayGuard process(es) before starting a fresh session..."
+    foreach ($key in @($targets.Keys)) {
+        Stop-Process -Id $key -Force -ErrorAction SilentlyContinue
+    }
+    for ($attempt = 0; $attempt -lt 20; $attempt++) {
+        $still = @(Get-NetTCPConnection -LocalPort $Port -State Listen -ErrorAction SilentlyContinue)
+        if ($still.Count -eq 0) { return }
+        Start-Sleep -Milliseconds 500
+    }
+    throw "Port $Port is still in use after stopping RayGuard. Close the other program or choose another port."
+}
+
 try {
     if (-not (Test-Path -LiteralPath (Join-Path $engineRoot 'pyproject.toml') -PathType Leaf)) {
         throw 'The pinned engine is missing. Run git submodule update --init --recursive from this checkout, then rerun the launcher.'
@@ -45,31 +101,8 @@ try {
         }
     }
 
-    # Repeated launches preserve the live session instead of spawning another server.
-    $existing = $null
-    try {
-        $existing = Invoke-RestMethod "$appUrl/api/health" -TimeoutSec 2
-    } catch { }
-    $knownModels = @{
-        'author-yolov10m-generic' = 'iedxray.generic_explosive_detection'
-        'author-yolov10m-device' = 'iedxray.device_detection'
-        'author-yolov10m-specific' = 'iedxray.specific_explosive_detection'
-    }
-    if ($existing.status -eq 'ok' -and $null -ne $existing.model.id -and
-        $knownModels.ContainsKey([string]$existing.model.id) -and
-        $existing.model.task -eq $knownModels[[string]$existing.model.id]) {
-        $page = $null
-        try { $page = Invoke-WebRequest $appUrl -UseBasicParsing -TimeoutSec 2 } catch { }
-        if ($null -eq $page -or $page.Content -notmatch '<title>RayGuard') {
-            throw 'An API-only RayGuard service is running. Stop it, then rerun this launcher to build and serve the UI.'
-        }
-        if ($explicitConfig -or $SetupModel -or $explicitDevice) {
-            throw "RayGuard is already running at $appUrl. Stop it or choose -Port to use a different config."
-        }
-        Write-Host "RayGuard is already running. Open $appUrl"
-        Write-Host 'Stop the existing service before rebuilding or applying config changes.'
-        return
-    }
+    # Stop earlier RayGuard processes so every launch starts a fresh session.
+    Stop-PreviousRayGuard -Port $Port
     $probe = [System.Net.Sockets.TcpListener]::new([System.Net.IPAddress]::Loopback, $Port)
     try {
         $probe.Start()
