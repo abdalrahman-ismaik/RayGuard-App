@@ -1,5 +1,118 @@
 # App engineering record
 
+## Report screenshots — 23 November 2026
+
+Claude (AI agent) captured 12 synthetic-fixture screenshots for the final report at
+Mohammad's request; Mohammad reviewed and committed them. Files and captions:
+`docs/images/report/`. Six states (intake, explicit run, prediction vs reference,
+empty result, failed run with model unavailable, session history), each in Onyx and
+Onyx Light. Captured with a git-ignored Playwright script (installed Chrome, 1440x900,
+2x) and API routes fulfilled by fixtures; all 12 captures passed and each image was
+visually inspected. Limitations: synthetic UI states only; no scans, inference, model
+performance, hardware or human-acceptance evidence.
+
+## T43 publication preparation — 23 November 2026
+
+Codex (AI agent) drafted the four T43 app files and docs at Mohammad's request.
+Mohammad reviewed the diff and committed and pushed it under his own account on
+`mohammad/gui-acceptance`, then opened a PR against main. This records authorship
+of the commit only, not joint technical acceptance.
+
+Branch: `mohammad/gui-acceptance`, based on
+`3488abdd60e9b68ac62cc4d35ce85245c0f9bdf9` (matching origin/main at preparation).
+Scope: `frontend/tests/e2e/t43-acceptance.spec.ts`,
+`docs/t43-gui-acceptance.md`, `docs/progress.md`, `docs/status.md`.
+No production code, dependency lock or engine pin changes.
+
+Fresh checks on 23 November:
+- App root: `npm.cmd --prefix frontend run build` passed.
+- Frontend: `$env:PLAYWRIGHT_CHANNEL='chrome'; npm.cmd run test:e2e -- t43-acceptance.spec.ts`
+  passed all eight checks in 12.8 seconds.
+- Frontend: `npx.cmd tsc --ignoreConfig --noEmit --strict --skipLibCheck --target ES2022 --module ESNext --moduleResolution bundler --types node tests/e2e/t43-acceptance.spec.ts`
+  passed. An initial invocation from the app root could not resolve the frontend
+  Node types; running from the documented frontend directory resolved it.
+- `git diff --check` passed; the four-file scope and synthetic evidence labels were reviewed.
+
+The 157-browser/280-backend results below are the earlier 15 November run, not
+a new full-suite result. Hosted checks and human review of the published head are
+separate gates. Mohammad has since confirmed the GUI opens successfully; no joint
+walkthrough with Abd, model qualification or completed personal checklist is inferred.
+Next: obtain human review of the app PR, walk through the demo with Abd and record
+actual acceptance outcomes and the app commit/PR link in the research handoff.
+
+
+## T43 GUI acceptance slice — 15 November 2026
+
+Mohammad requested this T43 scope. Automated implementation/verification prepared
+the isolated test/documentation slice; student understanding, hours, personal
+acceptance and Abd's integration review are not inferred. The app checkout was
+clean at `3488abdd60e9b68ac62cc4d35ce85245c0f9bdf9`; engine remains
+`b7ec59ecf5aa2f63ddeb580a7f232da0906abbd4`.
+
+Added `frontend/tests/e2e/t43-acceptance.spec.ts` and
+[the acceptance record](t43-gui-acceptance.md), with this progress entry and the
+status handoff. Eight focused checks fill gaps in saved-session search/filter/sort,
+keyboard entry, selected image/unsaved draft retention across routes/themes,
+saved versus current model identity, empty/failed results and Session/Review
+accessibility at 320/1366px in Onyx/Onyx Light. The test image, names and provenance
+are explicitly synthetic; every API mutation is rejected and checked. No production
+component, model adapter, dependency pin or engine source was changed.
+
+Executed on Windows with Node 24.16.0, npm 11.13.0, installed Chrome 157.0.8103.51
+and CPython 3.14.0. Results:
+
+| Directory | Exact command | Outcome |
+|---|---|---|
+| App root | `npm --prefix frontend ci` | Passed, 32 packages installed; npm reported two high-severity dependency advisories. No lock change or automatic dependency upgrade. |
+| App root | `npm --prefix frontend run build` | Passed. |
+| App frontend | `npx tsc --ignoreConfig --noEmit --strict --skipLibCheck --target ES2022 --module ESNext --moduleResolution bundler --types node tests/e2e/t43-acceptance.spec.ts` | Passed; separately checks the new tests excluded from the app build's source list. |
+| App frontend | `$env:PLAYWRIGHT_CHANNEL='chrome'; npm run test:e2e -- t43-acceptance.spec.ts` | 8 passed (23.3 seconds). |
+| App frontend | `$env:PLAYWRIGHT_CHANNEL='chrome'; npm run test:e2e` | 157 passed (6.8 minutes), including all 149 pre-existing checks and the eight new checks. |
+| App root | `uv run --project backend --locked ruff check backend` | Passed. |
+| App root | `uv run --project backend --locked python -m pytest backend/tests` | 280 passed; one existing Starlette/httpx deprecation warning. |
+| Research root | `uv run --locked ruff check .` | Passed. |
+| Research root | `uv run --locked python -m pytest` | 187 passed, 9 skipped because this Windows account cannot create the test symlinks. |
+
+Setup: `uv` was initially absent. A temporary standalone official uv 0.9.7 executable
+was added to the checking process's PATH only; locked isolated environments were
+created. No model environment or global settings were changed.
+`npx playwright install chromium` failed after download timeouts, so the documented
+installed-Chrome alternative was used. Bundled Playwright Chromium was not verified.
+Some existing browser cases emitted local proxy connection-refused messages;
+the full suite nevertheless completed with no failed assertions.
+
+Reviewed generated synthetic processing-split screenshots at 320px Onyx Light and
+1366px Onyx: active/held scan identities and reference/result labels remain separate.
+The acceptance page's relative links resolve; final whitespace checks passed.
+Generated screenshots, environments and browser outputs remain ignored.
+
+Limitations: this is synthetic software verification, not model execution,
+accuracy, accessibility certification or human showcase acceptance. Dependency
+advisory remediation is outside this T43 slice and still needs maintainer review.
+Intended lab model pairing, screen-reader/presentation-laptop rehearsal and physical
+scanner export acceptance remain open. Historical schedule conflicts remain unchanged.
+
+Next: Mohammad reviews/explains this diff, performs the pending personal checklist
+with Abd and the relevant model/evaluation owners, then personally publishes the
+reviewed increment and adds its app commit/PR link to the team progress record.
+No commit, push, PR or student sign-off was made by this session.
+
+### Manual launch repair — 15 November 2026
+
+The user's terminal could not resolve the profile-level Python path embedded in
+`backend/.venv`. That path still resolved in the checking environment, so terminal
+visibility differed. Installed CPython 3.14.0 under ignored `backend/.venv-python`
+using `uv python install 3.14.0 --install-dir backend/.venv-python --no-bin --no-registry`.
+Preserved the old environment as ignored `backend/.venv-before-t43-repair` and ran
+`uv sync --project backend --locked --python <project-local-python.exe>` to rebuild
+against the project-local interpreter. No dependency lock or global setting changed.
+
+Verified `backend/.venv/Scripts/rayguard-gui.exe --help`, then started the GUI:
+startup completed, `GET /` returned HTTP 200 and `/api/health` reported the model
+unconfigured. The service was left running on loopback port 8765 for manual review.
+All three environment directories are ignored. The user's own terminal retry
+remains to be observed; no model execution or manual acceptance is inferred.
+
 ## Repository extraction — 27 September 2026
 
 The owner requested immediate separation and public visibility. Automated

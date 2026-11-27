@@ -1,5 +1,17 @@
 # App status
 
+**T43 review preparation — 23 November 2026:** Mohammad's isolated acceptance slice
+adds eight synthetic saved-review/accessibility checks and an
+[acceptance checklist](t43-gui-acceptance.md). Build, 157 browser checks, backend
+lint/280 tests and the new test's type check passed. Shared-project lint passed;
+187 tests passed and nine Windows symlink checks were skipped.
+See [commands and limitations](progress.md#t43-gui-acceptance-slice--15-november-2026).
+Fresh 23 November checks passed: build, eight T43 browser checks and test type check.
+The full-suite counts above are the 15 November results. Mohammad authorized
+publication on `mohammad/gui-acceptance` (Codex-drafted, reviewed and committed by Mohammad).
+Production GUI/model code and the engine pin are unchanged. Human acceptance,
+explain-back and Abd's integration review remain open.
+
 Updated 27 September 2026. The application has been extracted into its own public
 repository. Since 27 November 2026 the engine is bundled in `engine/` (no
 submodule), and the fine-tuned generic model is selectable and downloadable from
